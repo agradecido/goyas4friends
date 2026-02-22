@@ -5,45 +5,42 @@ import path from 'path'
 const prisma = new PrismaClient()
 
 async function main() {
-  console.log('🌱 Sembrando base de datos REAL...')
+  console.log('🌱 Sembrando base de datos REAL (Modo Seguro)...')
 
   // Leer JSON
   const rawData = await fs.readFile(path.join(process.cwd(), 'goyas_data.json'), 'utf-8')
   const goyasData = JSON.parse(rawData)
 
-  // Limpieza total (¡Peligro! Borra votos)
-  // Si ya teníais votos reales, coméntalo. Como es dev, borramos.
-  await prisma.vote.deleteMany({})
-  await prisma.seenMovie.deleteMany({})
-  await prisma.nomination.deleteMany({})
-  await prisma.category.deleteMany({})
-  await prisma.movie.deleteMany({})
+  // ⚠️ IMPORTANTE: No borramos datos para no perder votos en producción
+  // await prisma.vote.deleteMany({}) 
 
   for (const item of goyasData) {
-    console.log(`📂 Creando categoría: ${item.category}`)
+    // console.log(`📂 Verificando categoría: ${item.category}`)
     
-    const category = await prisma.category.create({
-      data: { name: item.category }
-    })
+    // Buscar o crear categoría
+    let category = await prisma.category.findFirst({ where: { name: item.category } })
+    if (!category) {
+        category = await prisma.category.create({ data: { name: item.category } })
+    }
 
     for (const nom of item.nominations) {
-        // Normalizar título (quitar espacios extra, mayúsculas raras...)
+        // Normalizar título
         const title = nom.movie.trim()
         
-        // Buscar o crear película (para no duplicarlas si salen en varias categorías)
+        // Buscar o crear película
         let movie = await prisma.movie.findFirst({ where: { title } })
         
         if (!movie) {
             movie = await prisma.movie.create({
                 data: {
                     title,
-                    director: 'Ver ficha', // El scraper no sacó director fácil, lo dejamos genérico
+                    director: 'Ver ficha', 
                     imageUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(title)}&background=random&size=500`
                 }
             })
         }
 
-        // Crear nominación (Evitando duplicados si hay varios nominados por la misma peli en la misma categoría)
+        // Crear nominación si no existe
         const nomExists = await prisma.nomination.findUnique({
             where: { movieId_categoryId: { movieId: movie.id, categoryId: category.id } }
         })
@@ -59,15 +56,16 @@ async function main() {
     }
   }
 
-  // Usuario admin (si no existe)
-  const adminExists = await prisma.user.findUnique({ where: { username: 'javi' } })
-  if (!adminExists) {
+  // Usuario admin por defecto (solo si no existe ninguno)
+  const usersCount = await prisma.user.count()
+  if (usersCount === 0) {
       await prisma.user.create({
-        data: { username: 'javi', password: 'admin', name: 'Javi Admin' }
+        data: { username: 'admin', password: 'admin', name: 'Admin Inicial' }
       })
+      console.log('👤 Usuario admin creado.')
   }
 
-  console.log('✅ ¡Todo importado!')
+  console.log('✅ ¡Datos sincronizados sin borrar votos!')
 }
 
 main()
