@@ -1,0 +1,702 @@
+[
+  {
+    "category": "Mejor película",
+    "nominations": [
+      {
+        "movie": "La cena",
+        "person": "Cristóbal García, Lina Badenes, Roberto Butragueño"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Manu Calvo, Marisa Fernández Armenteros, Nahikari Ipiña, Sandra Hermida Muñiz"
+      },
+      {
+        "movie": "Maspalomas",
+        "person": "Ander Barinaga-Rementeria Arano, Ander Sagardoy Múgica, Fernando Larrondo, Xabier Berzosa"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Agustín Almodóvar, Esther García, Oriol Maymó, Xavi Font"
+      },
+      {
+        "movie": "Sorda 2",
+        "person": "Adolfo Blanco, Miriam Porté, Nuria Muñoz Ortín"
+      }
+    ]
+  },
+  {
+    "category": "Mejor dirección",
+    "nominations": [
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Maspalomas",
+        "person": "Maspalomas"
+      },
+      {
+        "movie": "Romeria",
+        "person": "Romería"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      },
+      {
+        "movie": "Tardes de soledad",
+        "person": "Tardes de soledad"
+      }
+    ]
+  },
+  {
+    "category": "Mejor dirección novel",
+    "nominations": [
+      {
+        "movie": "Balearic",
+        "person": "Balearic"
+      },
+      {
+        "movie": "Estrany riu",
+        "person": "Estrany riu"
+      },
+      {
+        "movie": "La furia",
+        "person": "La furia"
+      },
+      {
+        "movie": "Muy lejos",
+        "person": "Muy lejos"
+      },
+      {
+        "movie": "Sorda 2",
+        "person": "Sorda"
+      }
+    ]
+  },
+  {
+    "category": "Mejor guion original",
+    "nominations": [
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Maspalomas",
+        "person": "Maspalomas"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      },
+      {
+        "movie": "Un fantasma en la batalla",
+        "person": "Un fantasma en la batallaEste contenido es una creación protegida por el derecho\n                    de autor y objeto de propiedad intelectual, habiéndose\n                    autorizado su acceso a través de esta página Web por el\n                    titular de los citados derechos a los solos efectos de\n                    su lectura para disfrute privado de los usuarios,\n                    quedando terminantemente prohibido su utilización para\n                    fines comerciales o para cualquier otro fin distinto al\n                    expresado"
+      },
+      {
+        "movie": "Una quinta portuguesa",
+        "person": "Una quinta portuguesa"
+      }
+    ]
+  },
+  {
+    "category": "Mejor guion adaptado",
+    "nominations": [
+      {
+        "movie": "Ciudad sin sueno",
+        "person": "Ciudad sin sueñoEste contenido es una creación protegida por el derecho\n                    de autor y objeto de propiedad intelectual, habiéndose\n                    autorizado su acceso a través de esta página Web por el\n                    titular de los citados derechos a los solos efectos de\n                    su lectura para disfrute privado de los usuarios,\n                    quedando terminantemente prohibido su utilización para\n                    fines comerciales o para cualquier otro fin distinto al\n                    expresado"
+      },
+      {
+        "movie": "La buena letra",
+        "person": "La buena letra"
+      },
+      {
+        "movie": "La cena",
+        "person": "La cenaEste contenido es una creación protegida por el derecho\n                    de autor y objeto de propiedad intelectual, habiéndose\n                    autorizado su acceso a través de esta página Web por el\n                    titular de los citados derechos a los solos efectos de\n                    su lectura para disfrute privado de los usuarios,\n                    quedando terminantemente prohibido su utilización para\n                    fines comerciales o para cualquier otro fin distinto al\n                    expresado"
+      },
+      {
+        "movie": "Romeria",
+        "person": "Romería"
+      },
+      {
+        "movie": "Sorda 2",
+        "person": "Sorda"
+      }
+    ]
+  },
+  {
+    "category": "Mejor música original",
+    "nominations": [
+      {
+        "movie": "El talento",
+        "person": "El talento"
+      },
+      {
+        "movie": "Leo lou",
+        "person": "Leo & Lou"
+      },
+      {
+        "movie": "Los tigres",
+        "person": "Los Tigres"
+      },
+      {
+        "movie": "Maspalomas",
+        "person": "Maspalomas"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      }
+    ]
+  },
+  {
+    "category": "Mejor canción original",
+    "nominations": [
+      {
+        "movie": "Caigan las rosas blancas",
+        "person": "¡Caigan las rosas blancas!"
+      },
+      {
+        "movie": "Flores para antonio",
+        "person": "Flores para Antonio"
+      },
+      {
+        "movie": "Hasta que me quede sin voz",
+        "person": "Hasta que me quede sin voz"
+      },
+      {
+        "movie": "La cena",
+        "person": "La cena"
+      },
+      {
+        "movie": "Parecido a un asesinato",
+        "person": "Parecido a un asesinato"
+      }
+    ]
+  },
+  {
+    "category": "Mejor actor protagonista",
+    "nominations": [
+      {
+        "movie": "La cena",
+        "person": "La cena"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Maspalomas",
+        "person": "Maspalomas"
+      },
+      {
+        "movie": "Muy lejos",
+        "person": "Muy lejos"
+      },
+      {
+        "movie": "Una quinta portuguesa",
+        "person": "Una quinta portuguesa"
+      }
+    ]
+  },
+  {
+    "category": "Mejor actriz protagonista",
+    "nominations": [
+      {
+        "movie": "La furia",
+        "person": "La furia"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Los tortuga",
+        "person": "Los Tortuga"
+      },
+      {
+        "movie": "Mi amiga eva",
+        "person": "Mi amiga Eva"
+      },
+      {
+        "movie": "Un fantasma en la batalla",
+        "person": "Un fantasma en la batalla"
+      }
+    ]
+  },
+  {
+    "category": "Mejor actor de reparto",
+    "nominations": [
+      {
+        "movie": "El cautivo",
+        "person": "El cautivo"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Maspalomas",
+        "person": "Maspalomas"
+      },
+      {
+        "movie": "Rondallas",
+        "person": "Rondallas"
+      },
+      {
+        "movie": "Sorda 2",
+        "person": "Sorda"
+      }
+    ]
+  },
+  {
+    "category": "Mejor actriz de reparto",
+    "nominations": [
+      {
+        "movie": "La cena",
+        "person": "La cena"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Romeria",
+        "person": "Romería"
+      },
+      {
+        "movie": "Sorda 2",
+        "person": "Sorda"
+      },
+      {
+        "movie": "Una quinta portuguesa",
+        "person": "Una quinta portuguesa"
+      }
+    ]
+  },
+  {
+    "category": "Mejor actor revelación",
+    "nominations": [
+      {
+        "movie": "Ciudad sin sueno",
+        "person": "Ciudad sin sueño"
+      },
+      {
+        "movie": "El cautivo",
+        "person": "El cautivo"
+      },
+      {
+        "movie": "Enemigos",
+        "person": "Enemigos"
+      },
+      {
+        "movie": "Estrany riu",
+        "person": "Estrany riu"
+      },
+      {
+        "movie": "Romeria",
+        "person": "Romería"
+      }
+    ]
+  },
+  {
+    "category": "Mejor actriz revelación",
+    "nominations": [
+      {
+        "movie": "La cena",
+        "person": "La cena"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Los tortuga",
+        "person": "Los Tortuga"
+      },
+      {
+        "movie": "Romeria",
+        "person": "Romería"
+      },
+      {
+        "movie": "Sorda 2",
+        "person": "Sorda"
+      }
+    ]
+  },
+  {
+    "category": "Mejor dirección de producción",
+    "nominations": [
+      {
+        "movie": "Ciudad sin sueno",
+        "person": "Ciudad sin sueño"
+      },
+      {
+        "movie": "El cautivo",
+        "person": "El cautivo"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Los tigres",
+        "person": "Los Tigres"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      }
+    ]
+  },
+  {
+    "category": "Mejor dirección de fotografía",
+    "nominations": [
+      {
+        "movie": "Ciudad sin sueno",
+        "person": "Ciudad sin sueño"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Los tigres",
+        "person": "Los Tigres"
+      },
+      {
+        "movie": "Maspalomas",
+        "person": "Maspalomas"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      }
+    ]
+  },
+  {
+    "category": "Mejor montaje",
+    "nominations": [
+      {
+        "movie": "Ciudad sin sueno",
+        "person": "Ciudad sin sueño"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Los tigres",
+        "person": "Los Tigres"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      },
+      {
+        "movie": "Un fantasma en la batalla",
+        "person": "Un fantasma en la batalla"
+      }
+    ]
+  },
+  {
+    "category": "Mejor dirección de arte",
+    "nominations": [
+      {
+        "movie": "El cautivo",
+        "person": "El cautivo"
+      },
+      {
+        "movie": "La cena",
+        "person": "La cena"
+      },
+      {
+        "movie": "Los tigres",
+        "person": "Los Tigres"
+      },
+      {
+        "movie": "Maspalomas",
+        "person": "Maspalomas"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      }
+    ]
+  },
+  {
+    "category": "Mejor diseño de vestuario",
+    "nominations": [
+      {
+        "movie": "El cautivo",
+        "person": "El cautivo"
+      },
+      {
+        "movie": "Gaua",
+        "person": "Gaua"
+      },
+      {
+        "movie": "La cena",
+        "person": "La cena"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Romeria",
+        "person": "Romería"
+      }
+    ]
+  },
+  {
+    "category": "Mejor maquillaje y peluquería",
+    "nominations": [
+      {
+        "movie": "El cautivo",
+        "person": "El cautivo"
+      },
+      {
+        "movie": "Gaua",
+        "person": "Gaua"
+      },
+      {
+        "movie": "La tregua",
+        "person": "La tregua"
+      },
+      {
+        "movie": "Maspalomas",
+        "person": "Maspalomas"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      }
+    ]
+  },
+  {
+    "category": "Mejor sonido",
+    "nominations": [
+      {
+        "movie": "El cautivo",
+        "person": "El cautivo"
+      },
+      {
+        "movie": "Los domingos",
+        "person": "Los Domingos"
+      },
+      {
+        "movie": "Los tigres",
+        "person": "Los Tigres"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      },
+      {
+        "movie": "Sorda 2",
+        "person": "Sorda"
+      }
+    ]
+  },
+  {
+    "category": "Mejores efectos especiales",
+    "nominations": [
+      {
+        "movie": "Enemigos",
+        "person": "Enemigos"
+      },
+      {
+        "movie": "Gaua",
+        "person": "Gaua"
+      },
+      {
+        "movie": "Los tigres",
+        "person": "Los Tigres"
+      },
+      {
+        "movie": "Sirat",
+        "person": "Sirât"
+      },
+      {
+        "movie": "Un fantasma en la batalla",
+        "person": "Un fantasma en la batalla"
+      }
+    ]
+  },
+  {
+    "category": "Mejor película de animación",
+    "nominations": [
+      {
+        "movie": "Bella",
+        "person": "Bernabé Rico, Carlos Rosado Sibón, Manuel H. Martín, Olmo Figueredo González-Quevedo"
+      },
+      {
+        "movie": "Decorado 2",
+        "person": "Alberto Vázquez, Chelo Loureiro, Iván Miñambres, Jose María Fernández de Vega"
+      },
+      {
+        "movie": "El tesoro de barracuda",
+        "person": "Adrián García, Álex Cervantes, Raphaële Ingberg, Valérie Delpierre"
+      },
+      {
+        "movie": "Norbert",
+        "person": "Álvaro Urtizberea, José Corral Llorente, Nacho La Casa, Pedro Hernández Santos"
+      },
+      {
+        "movie": "Olivia y el terremoto invisible",
+        "person": "Eduard Puertas Anfruns, Irene Iborra Rizo, Mikel Mas Bilbao, Ramón Alòs Sánchez"
+      }
+    ]
+  },
+  {
+    "category": "Mejor película documental",
+    "nominations": [
+      {
+        "movie": "2025 todos somos gaza",
+        "person": "Hernán Zin, Yousef Hammash"
+      },
+      {
+        "movie": "Eloy de la iglesia adicto al cine",
+        "person": "Gaizka Urresti, Julio Díez, Oihana Olea"
+      },
+      {
+        "movie": "Flores para antonio",
+        "person": "Alba Flores, Bruna Hernando, Elena Molina, Isaki Lacuesta"
+      },
+      {
+        "movie": "Tardes de soledad",
+        "person": "Albert Serra, Luis Ferrón, Montse Triola, Pedro Palacios"
+      },
+      {
+        "movie": "The sleeper el caravaggio perdido",
+        "person": "Álvaro Longoria, Francisco Pou, Gerardo Olivares, Ricardo Fernández-Deu"
+      }
+    ]
+  },
+  {
+    "category": "Mejor película iberoamericana",
+    "nominations": [
+      {
+        "movie": "Belen",
+        "person": "Argentina"
+      },
+      {
+        "movie": "La misteriosa mirada del flamenco",
+        "person": "Chile"
+      },
+      {
+        "movie": "La piel del agua",
+        "person": "Costa Rica"
+      },
+      {
+        "movie": "Manas",
+        "person": "Brasil"
+      },
+      {
+        "movie": "Un poeta",
+        "person": "Colombia"
+      }
+    ]
+  },
+  {
+    "category": "Mejor película europea",
+    "nominations": [
+      {
+        "movie": "Conclave",
+        "person": "Reino Unido"
+      },
+      {
+        "movie": "La chica de la aguja the girl with the needle",
+        "person": "Dinamarca"
+      },
+      {
+        "movie": "On falling",
+        "person": "Portugal"
+      },
+      {
+        "movie": "Un simple accidente",
+        "person": "Francia"
+      },
+      {
+        "movie": "Valor sentimental",
+        "person": "Noruega"
+      }
+    ]
+  },
+  {
+    "category": "Mejor cortometraje de ficción",
+    "nominations": [
+      {
+        "movie": "Angulo muerto",
+        "person": "Producción: José Luis Rancaño, Pablo López TorresDirección: Cristian Beteta"
+      },
+      {
+        "movie": "De sucre",
+        "person": "Producción: Ariadna Dot, Rafa Molés, Tono FolgueraDirección: Clàudia Cedó"
+      },
+      {
+        "movie": "El cuento de una noche de verano",
+        "person": "Producción: Emilia Fort, María Herrera, Stefan SchmitzDirección: María Herrera"
+      },
+      {
+        "movie": "Sexo a los 70",
+        "person": "Producción: Beatriz Bodegas, Paloma Tejero, Raúl RuanoDirección: Vanesa Romero"
+      },
+      {
+        "movie": "Una cabeza en la pared",
+        "person": "Producción: Alberto Torres, Diego Saniz, Jorge Acosta, Manuel ManriqueDirección: Manuel Manrique"
+      }
+    ]
+  },
+  {
+    "category": "Mejor cortometraje documental",
+    "nominations": [
+      {
+        "movie": "Disonancia",
+        "person": "Producción: Eva Patricia Fernández Manzano, Rafael LinaresDirección: Raquel Larrosa"
+      },
+      {
+        "movie": "El santo",
+        "person": "Producción: Adán Aliaga, Carlo D'Ursi, Miguel Molina CarmonaDirección: Carlo D'Ursi"
+      },
+      {
+        "movie": "La conversacion que nunca tuvimos",
+        "person": "Producción: Cristina Urgel, Eva MorenoDirección: Cristina Urgel"
+      },
+      {
+        "movie": "The painters room",
+        "person": "Producción: Bernat Manzano, Miguel Ángel Blanca, Montse Pujol SolàDirección: María Colomer Canyelles"
+      },
+      {
+        "movie": "Zona wao",
+        "person": "Producción: Izaskun Arandia, Nagore Eceiza MugicaDirección: Nagore Eceiza Mugica"
+      }
+    ]
+  },
+  {
+    "category": "Mejor cortometraje de animación",
+    "nominations": [
+      {
+        "movie": "Buffet paraiso",
+        "person": "Producción: Álex Cervantes, Roger TorrasDirección: Héctor Zafra, Santi Amézqueta"
+      },
+      {
+        "movie": "Carmela",
+        "person": "Producción: David Castro González, Ilan Urroz, Leticia MontalváDirección: Vicente Mallols"
+      },
+      {
+        "movie": "El corto de ruben",
+        "person": "Producción: Jose María Fernández de VegaDirección: Jose María Fernández de Vega"
+      },
+      {
+        "movie": "El estado del alma",
+        "person": "Producción: Diogo Carvalho, Jose María Fernández de Vega, Nuno BeatoDirección: Sara Naves"
+      },
+      {
+        "movie": "Gilbert",
+        "person": "Producción: Mónica GallegoDirección: Alex Salu, Arturo Lacal, Jordi Jiménez"
+      }
+    ]
+  }
+]

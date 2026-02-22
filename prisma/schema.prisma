@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String   // Hash simple para este proyecto local
+  name      String?
+  hasSeenHelp Boolean @default(false)
+  createdAt DateTime @default(now())
+  
+  votes     Vote[]
+  seen      SeenMovie[]
+}
+
+model Movie {
+  id        String   @id @default(uuid())
+  title     String
+  director  String?
+  imageUrl  String?  // URL a un cartel si queremos ponerlo bonito
+  year      Int      @default(2025)
+  
+  nominations Nomination[]
+  seenBy      SeenMovie[]
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String   // "Mejor Película", "Mejor Dirección"...
+  
+  nominations Nomination[]
+  votes       Vote[]
+}
+
+// Tabla intermedia para relacionar Película <-> Categoría
+// Una peli puede estar nominada en varias categorías
+model Nomination {
+  id          String   @id @default(uuid())
+  movieId     String
+  categoryId  String
+  
+  movie       Movie    @relation(fields: [movieId], references: [id])
+  category    Category @relation(fields: [categoryId], references: [id])
+  
+  votes       Vote[]
+
+  @@unique([movieId, categoryId]) // Una peli no puede estar nominada 2 veces a lo mismo
+}
+
+// La quiniela del usuario
+model Vote {
+  id            String   @id @default(uuid())
+  userId        String
+  categoryId    String
+  nominationId  String   // Vota a una nominación específica
+  
+  user          User       @relation(fields: [userId], references: [id])
+  category      Category   @relation(fields: [categoryId], references: [id])
+  nomination    Nomination @relation(fields: [nominationId], references: [id])
+
+  @@unique([userId, categoryId]) // Un usuario solo un voto por categoría
+}
+
+// Checklist de vistas
+model SeenMovie {
+  id        String   @id @default(uuid())
+  userId    String
+  movieId   String
+  watchedAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id])
+  movie     Movie    @relation(fields: [movieId], references: [id])
+
+  @@unique([userId, movieId])
+}
