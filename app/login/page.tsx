@@ -22,7 +22,7 @@ export default function LoginPage() {
           <form action={handleLogin} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username">Usuario</Label>
-              <Input id="username" name="username" placeholder="javi" required />
+              <Input id="username" name="username" placeholder="tu-nickname" required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Contraseña</Label>
