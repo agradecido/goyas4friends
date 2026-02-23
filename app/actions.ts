@@ -3,6 +3,7 @@
 import { prisma } from '@/lib/prisma'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { unstable_cache } from 'next/cache'
 
 // --- AUTH ---
 
@@ -25,6 +26,7 @@ export async function login(formData: FormData) {
       redirect('/')
     }
   } else {
+    // TODO: Devolver error visual
     return { error: 'Usuario o contraseña incorrectos' }
   }
 }
@@ -83,27 +85,37 @@ export async function getSession() {
 
 // --- DATA ---
 
+// Cacheamos las categorías y nominados (datos estáticos para todos)
+const getStaticCategories = unstable_cache(
+  async () => {
+    return await prisma.category.findMany({
+      include: {
+        nominations: {
+          include: {
+            movie: true
+          }
+        }
+      },
+      orderBy: { name: 'asc' } // Ordenar para consistencia
+    })
+  },
+  ['goyas-static-data'], // Clave de caché
+  { revalidate: 3600 }   // Revalidar cada hora (o nunca, si no cambian)
+)
+
 export async function getGoyasData() {
   const user = await getSession()
   if (!user) return null
 
-  const categories = await prisma.category.findMany({
-    include: {
-      nominations: {
-        include: {
-          movie: true
-        }
-      }
-    }
-  })
-
-  const myVotes = await prisma.vote.findMany({
-    where: { userId: user.id }
-  })
-
-  const mySeen = await prisma.seenMovie.findMany({
-    where: { userId: user.id }
-  })
+  // Paralelizamos las consultas:
+  // 1. Datos estáticos (cacheados)
+  // 2. Votos del usuario
+  // 3. Pelis vistas del usuario
+  const [categories, myVotes, mySeen] = await Promise.all([
+    getStaticCategories(),
+    prisma.vote.findMany({ where: { userId: user.id } }),
+    prisma.seenMovie.findMany({ where: { userId: user.id } })
+  ])
 
   return { categories, myVotes, mySeen, user }
 }
@@ -129,6 +141,7 @@ export async function getGlobalStats() {
   if (!user) return null
 
   // Obtener todas las categorías con sus nominaciones
+  // (Aquí no usamos la caché simple porque necesitamos los votos de TODOS)
   const categories = await prisma.category.findMany({
     include: {
       nominations: {
@@ -154,7 +167,10 @@ export async function toggleVote(categoryId: string, nominationId: string) {
   const user = await getSession()
   if (!user) return
 
-  // Buscar si ya votó en esta categoría
+  // Optimistic update: No esperamos a leer el voto anterior si podemos evitarlo
+  // Pero Prisma necesita saber si es update o create.
+  // Usamos upsert o lógica directa.
+  
   const existingVote = await prisma.vote.findUnique({
     where: {
       userId_categoryId: {
@@ -165,18 +181,18 @@ export async function toggleVote(categoryId: string, nominationId: string) {
   })
 
   if (existingVote) {
-    // Si vota lo mismo, quitamos el voto (toggle off)
     if (existingVote.nominationId === nominationId) {
+      // Si es el mismo, lo quitamos
       await prisma.vote.delete({ where: { id: existingVote.id } })
     } else {
-      // Si cambia de voto, actualizamos
+      // Si es otro, actualizamos
       await prisma.vote.update({
         where: { id: existingVote.id },
         data: { nominationId }
       })
     }
   } else {
-    // Voto nuevo
+    // Nuevo voto
     await prisma.vote.create({
       data: {
         userId: user.id,
@@ -186,10 +202,10 @@ export async function toggleVote(categoryId: string, nominationId: string) {
     })
   }
 
-  // Forzar recarga de la página para actualizar visualmente el voto único
-  // (Así se desmarcan las otras opciones)
+  // Revalidar solo lo necesario
   const { revalidatePath } = await import('next/cache')
   revalidatePath('/')
+  revalidatePath('/my-votes')
 }
 
 export async function toggleSeen(movieId: string) {
@@ -215,4 +231,8 @@ export async function toggleSeen(movieId: string) {
       }
     })
   }
+  
+  const { revalidatePath } = await import('next/cache')
+  revalidatePath('/')
+  revalidatePath('/movies')
 }
