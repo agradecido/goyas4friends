@@ -1,14 +1,21 @@
+'use client'
+
 import { login } from '@/app/actions'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
+import { useTransition } from 'react'
+import { Loader2 } from 'lucide-react'
 
 export default function LoginPage() {
-  const handleLogin = async (formData: FormData) => {
-    'use server'
-    await login(formData)
+  const [isPending, startTransition] = useTransition()
+
+  const handleSubmit = (formData: FormData) => {
+    startTransition(async () => {
+      await login(formData)
+    })
   }
 
   return (
@@ -19,7 +26,7 @@ export default function LoginPage() {
           <CardDescription className="text-center">Entra para votar tu quiniela</CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={handleLogin} className="space-y-4">
+          <form action={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="username">Usuario</Label>
               <Input id="username" name="username" placeholder="tu-nickname" required />
@@ -28,7 +35,16 @@ export default function LoginPage() {
               <Label htmlFor="password">Contraseña</Label>
               <Input id="password" name="password" type="password" required />
             </div>
-            <Button type="submit" className="w-full">Entrar</Button>
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Entrando...
+                </>
+              ) : (
+                'Entrar'
+              )}
+            </Button>
             
             <div className="text-center text-sm pt-2">
               ¿Nuevo por aquí? <Link href="/register" className="text-blue-600 hover:underline">Regístrate</Link>
