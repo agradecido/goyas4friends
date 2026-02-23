@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu } from 'lucide-react'
+import { Menu, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -12,6 +12,36 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { logout } from '@/app/actions'
+import { useTransition } from 'react'
+
+function LogoutButton({ mobile = false }: { mobile?: boolean }) {
+  const [isPending, startTransition] = useTransition()
+
+  const handleLogout = () => {
+    startTransition(async () => {
+      await logout()
+    })
+  }
+
+  return (
+    <Button 
+      variant={mobile ? "destructive" : "ghost"} 
+      className={mobile ? "w-full justify-start" : "text-red-500 hover:text-red-700 hover:bg-red-50"} 
+      size="sm"
+      onClick={handleLogout}
+      disabled={isPending}
+    >
+      {isPending ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          {mobile ? 'Cerrando...' : 'Salir'}
+        </>
+      ) : (
+        mobile ? 'Cerrar Sesión' : 'Salir'
+      )}
+    </Button>
+  )
+}
 
 export function NavBar({ username }: { username: string }) {
   const pathname = usePathname()
@@ -81,19 +111,17 @@ export function NavBar({ username }: { username: string }) {
                   Usuario: <span className="font-bold text-slate-900">{username}</span>
                 </div>
                 
-                <form action={logout}>
-                  <Button variant="destructive" className="w-full justify-start" size="sm">
-                    Cerrar Sesión
-                  </Button>
-                </form>
+                <div className="w-full">
+                  <LogoutButton mobile />
+                </div>
               </div>
             </SheetContent>
           </Sheet>
           
           {/* Botón Logout Escritorio */}
-          <form action={logout} className="hidden md:block">
-             <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-700 hover:bg-red-50">Salir</Button>
-          </form>
+          <div className="hidden md:block">
+             <LogoutButton />
+          </div>
         </div>
       </div>
     </header>

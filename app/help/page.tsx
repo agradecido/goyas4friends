@@ -1,8 +1,20 @@
+'use client'
+
 import { completeOnboarding } from '@/app/actions'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { useTransition } from 'react'
+import { Loader2 } from 'lucide-react'
 
 export default function HelpPage() {
+  const [isPending, startTransition] = useTransition()
+
+  const handleComplete = () => {
+    startTransition(async () => {
+      await completeOnboarding()
+    })
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 p-4 flex items-center justify-center">
       <Card className="max-w-lg w-full shadow-xl border-orange-100">
@@ -38,11 +50,20 @@ export default function HelpPage() {
           </div>
 
           <div className="pt-4">
-            <form action={completeOnboarding}>
-              <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800 text-lg py-6">
-                ¡Entendido, vamos allá! 🚀
-              </Button>
-            </form>
+            <Button 
+              onClick={handleComplete} 
+              disabled={isPending}
+              className="w-full bg-slate-900 hover:bg-slate-800 text-lg py-6"
+            >
+              {isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Empezando...
+                </>
+              ) : (
+                '¡Entendido, vamos allá! 🚀'
+              )}
+            </Button>
           </div>
 
         </CardContent>
