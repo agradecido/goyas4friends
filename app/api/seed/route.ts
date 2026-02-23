@@ -6,15 +6,8 @@ import path from 'path'
 export async function GET(request: NextRequest) {
     // Proteger con un token secreto
     const token = request.nextUrl.searchParams.get('token')
-    const secret = process.env.SEED_SECRET
-    
-    // Debug temporal: si no hay SEED_SECRET configurado, permitir con token hardcoded
-    if (!secret) {
-        if (token !== 'goyas2026seed') {
-            return NextResponse.json({ error: 'No autorizado', debug: 'SEED_SECRET no configurada' }, { status: 401 })
-        }
-    } else if (token !== secret) {
-        return NextResponse.json({ error: 'No autorizado', debug: 'token no coincide' }, { status: 401 })
+    if (token !== process.env.SEED_SECRET) {
+        return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
     }
 
     try {
