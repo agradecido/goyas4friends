@@ -1,10 +1,8 @@
 'use server'
 
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-
-const prisma = new PrismaClient()
 
 // --- AUTH ---
 
@@ -20,11 +18,11 @@ export async function login(formData: FormData) {
     // Next.js 15: cookies() es asíncrono
     const cookieStore = await cookies()
     cookieStore.set('auth_user', user.id, { httpOnly: true })
-    
+
     if (!user.hasSeenHelp) {
-        redirect('/help')
+      redirect('/help')
     } else {
-        redirect('/')
+      redirect('/')
     }
   } else {
     return { error: 'Usuario o contraseña incorrectos' }
@@ -53,7 +51,7 @@ export async function register(formData: FormData) {
   // Auto-login al registrarse
   const cookieStore = await cookies()
   cookieStore.set('auth_user', user.id, { httpOnly: true })
-  
+
   // Usuario nuevo -> Directo a ayuda
   redirect('/help')
 }
@@ -62,8 +60,8 @@ export async function completeOnboarding() {
   const user = await getSession()
   if (user) {
     await prisma.user.update({
-        where: { id: user.id },
-        data: { hasSeenHelp: true }
+      where: { id: user.id },
+      data: { hasSeenHelp: true }
     })
   }
   redirect('/')
@@ -78,7 +76,7 @@ export async function logout() {
 export async function getSession() {
   const cookieStore = await cookies()
   const userId = cookieStore.get('auth_user')?.value
-  
+
   if (!userId) return null
   return await prisma.user.findUnique({ where: { id: userId } })
 }
@@ -187,7 +185,7 @@ export async function toggleVote(categoryId: string, nominationId: string) {
       }
     })
   }
-  
+
   // Forzar recarga de la página para actualizar visualmente el voto único
   // (Así se desmarcan las otras opciones)
   const { revalidatePath } = await import('next/cache')
