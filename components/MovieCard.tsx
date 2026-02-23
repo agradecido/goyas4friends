@@ -6,6 +6,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { toggleVote, toggleSeen } from '@/app/actions'
 import { useState, useEffect } from 'react'
 import { useTransition } from 'react'
+import { Loader2 } from 'lucide-react'
 
 type MovieCardProps = {
   movie: any
@@ -20,7 +21,8 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen }: 
   const [localVote, setLocalVote] = useState(isVoted)
   const [localSeen, setLocalSeen] = useState(isSeen)
   
-  const [isPending, startTransition] = useTransition()
+  const [isVotePending, startVoteTransition] = useTransition()
+  const [isSeenPending, startSeenTransition] = useTransition()
 
   // Sincronizar si el servidor manda datos nuevos (al recargar)
   useEffect(() => { setLocalVote(isVoted) }, [isVoted])
@@ -31,7 +33,7 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen }: 
     const newValue = !localVote
     setLocalVote(newValue)
     
-    startTransition(async () => {
+    startVoteTransition(async () => {
       // Llamada al servidor en segundo plano
       await toggleVote(categoryId, nominationId)
     })
@@ -40,7 +42,7 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen }: 
   const handleSeen = (checked: boolean) => {
     setLocalSeen(checked)
     
-    startTransition(async () => {
+    startSeenTransition(async () => {
       await toggleSeen(movie.id)
     })
   }
@@ -50,14 +52,18 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen }: 
       {/* Checkbox "Vista" en la esquina */}
       <div className="absolute top-2 right-2 z-10">
         <div className="flex items-center space-x-2 bg-white/95 p-1.5 rounded-full shadow-sm border border-slate-100 backdrop-blur-sm">
-          <Checkbox 
-            id={`seen-${movie.id}`} 
-            checked={localSeen}
-            onCheckedChange={handleSeen}
-            className="data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
-          />
+          {isSeenPending ? (
+            <Loader2 className="h-4 w-4 animate-spin text-slate-400" />
+          ) : (
+            <Checkbox 
+              id={`seen-${movie.id}`} 
+              checked={localSeen}
+              onCheckedChange={handleSeen}
+              className="data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
+            />
+          )}
           <label htmlFor={`seen-${movie.id}`} className="text-xs font-medium cursor-pointer select-none text-slate-600 pr-1">
-            Vista
+            {localSeen ? 'Vista' : 'Vista'}
           </label>
         </div>
       </div>
@@ -81,10 +87,18 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen }: 
           <div className="mt-4 pt-2">
             <Button 
               variant={localVote ? "default" : "outline"} 
+              disabled={isVotePending}
               className={`w-full transition-all active:scale-95 ${localVote ? 'bg-yellow-600 hover:bg-yellow-700 text-white font-bold shadow-md' : 'text-slate-600'}`}
               onClick={handleVote}
             >
-              {localVote ? '🏆 GANADORA' : 'Votar esta'}
+              {isVotePending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  {localVote ? 'Guardando...' : 'Quitando...'}
+                </>
+              ) : (
+                localVote ? '🏆 GANADORA' : 'Votar esta'
+              )}
             </Button>
           </div>
         </div>
