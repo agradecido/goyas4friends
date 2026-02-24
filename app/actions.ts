@@ -165,9 +165,16 @@ export async function getAllMoviesData() {
   const user = await getSession()
   if (!user) return null
 
-  // Obtener todas las pelis ordenadas por título
+  // Obtener todas las pelis con el conteo de nominaciones, ordenadas por más nominaciones primero
   const movies = await prisma.movie.findMany({
-    orderBy: { title: 'asc' }
+    include: {
+      _count: {
+        select: { nominations: true }
+      }
+    },
+    orderBy: {
+      nominations: { _count: 'desc' }
+    }
   })
 
   const mySeen = await prisma.seenMovie.findMany({

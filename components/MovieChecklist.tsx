@@ -6,9 +6,6 @@ import { toggleSeen } from '@/app/actions'
 import { useState, useTransition } from 'react'
 
 export function MovieChecklist({ movies, mySeen }: { movies: any[], mySeen: any[] }) {
-  // Ordenar: Vistas al final (opcional, pero ayuda)
-  // De momento orden alfabético simple
-  
   return (
     <div className="space-y-2">
       {movies.map(movie => (
@@ -43,7 +40,11 @@ function CheckItem({ movie, initialSeen }: { movie: any, initialSeen: boolean })
       />
       <label htmlFor={movie.id} className={`flex-1 cursor-pointer select-none ${seen ? 'line-through text-slate-500' : 'text-slate-900 font-medium'}`}>
         {movie.title}
-        {movie.director && <span className="block text-xs text-slate-400 font-normal no-underline">{movie.director}</span>}
+        <span className="block text-xs text-slate-400 font-normal no-underline">
+          {movie._count?.nominations > 0 && <span>{movie._count.nominations} nominaciones</span>}
+          {movie._count?.nominations > 0 && movie.director && <span> · </span>}
+          {movie.director && <span>{movie.director}</span>}
+        </span>
       </label>
     </Card>
   )
