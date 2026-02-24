@@ -85,10 +85,42 @@ export async function getSession() {
 
 // --- DATA ---
 
+// Orden personalizado de categorías
+const CATEGORY_ORDER = [
+  'Mejor película',
+  'Mejor dirección',
+  'Mejor dirección novel',
+  'Mejor guion original',
+  'Mejor guion adaptado',
+  'Mejor música original',
+  'Mejor canción original',
+  'Mejor actor protagonista',
+  'Mejor actriz protagonista',
+  'Mejor actor de reparto',
+  'Mejor actriz de reparto',
+  'Mejor actor revelación',
+  'Mejor actriz revelación',
+  'Mejor dirección de producción',
+  'Mejor dirección de fotografía',
+  'Mejor montaje',
+  'Mejor dirección de arte',
+  'Mejor diseño de vestuario',
+  'Mejor maquillaje y peluquería',
+  'Mejor sonido',
+  'Mejores efectos especiales',
+  'Mejor película de animación',
+  'Mejor película documental',
+  'Mejor película iberoamericana',
+  'Mejor película europea',
+  'Mejor cortometraje de ficción',
+  'Mejor cortometraje documental',
+  'Mejor cortometraje de animación',
+]
+
 // Cacheamos las categorías y nominados (datos estáticos para todos)
 const getStaticCategories = unstable_cache(
   async () => {
-    return await prisma.category.findMany({
+    const categories = await prisma.category.findMany({
       include: {
         nominations: {
           include: {
@@ -96,7 +128,16 @@ const getStaticCategories = unstable_cache(
           }
         }
       },
-      orderBy: { name: 'asc' } // Ordenar para consistencia
+    })
+    // Ordenar según el orden personalizado
+    return categories.sort((a, b) => {
+      const ia = CATEGORY_ORDER.indexOf(a.name)
+      const ib = CATEGORY_ORDER.indexOf(b.name)
+      // Categorías no listadas van al final, ordenadas alfabéticamente
+      if (ia === -1 && ib === -1) return a.name.localeCompare(b.name)
+      if (ia === -1) return 1
+      if (ib === -1) return -1
+      return ia - ib
     })
   },
   ['goyas-static-data'], // Clave de caché
