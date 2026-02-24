@@ -48,59 +48,56 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen }: 
   }
 
   return (
-    <Card className={`relative overflow-hidden transition-all duration-300 ${localVote ? 'border-2 border-yellow-500 shadow-lg bg-yellow-50/50 scale-[1.02]' : 'hover:border-slate-300 hover:shadow-sm'}`}>
-      {/* Checkbox "Vista" en la esquina */}
-      <div className="absolute top-2 right-2 z-10">
-        <div className="flex items-center space-x-2 bg-white/95 p-1.5 rounded-full shadow-sm border border-slate-100 backdrop-blur-sm">
-          {isSeenPending ? (
-            <Loader2 className="h-4 w-4 animate-spin text-slate-400" />
+    <Card className={`overflow-hidden transition-all duration-200 ${localVote ? 'border-2 border-yellow-500 bg-yellow-50/50' : 'hover:border-slate-300'}`}>
+      <div className="flex items-center gap-3 p-3">
+        {/* Thumbnail pequeño */}
+        <div className="w-12 h-16 bg-slate-200 rounded shrink-0 overflow-hidden">
+          {movie.imageUrl ? (
+            <img src={movie.imageUrl} alt={movie.title} className="w-full h-full object-cover" />
           ) : (
-            <Checkbox 
-              id={`seen-${movie.id}`} 
-              checked={localSeen}
-              onCheckedChange={handleSeen}
-              className="data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
-            />
+            <div className="flex items-center justify-center h-full text-slate-400 text-lg">🎬</div>
           )}
-          <label htmlFor={`seen-${movie.id}`} className="text-xs font-medium cursor-pointer select-none text-slate-600 pr-1">
-            {localSeen ? 'Vista' : 'Vista'}
-          </label>
-        </div>
-      </div>
-
-      <div className="flex flex-col sm:flex-row h-full">
-        {/* Imagen */}
-        <div className="w-full sm:w-32 h-48 sm:h-auto bg-slate-200 shrink-0 relative overflow-hidden">
-           {movie.imageUrl ? (
-             <img src={movie.imageUrl} alt={movie.title} className="w-full h-full object-cover" />
-           ) : (
-             <div className="flex items-center justify-center h-full text-slate-400 text-4xl">🎬</div>
-           )}
         </div>
 
-        <div className="p-4 flex flex-col justify-between w-full">
-          <div>
-            <CardTitle className="text-lg mb-1 leading-tight">{movie.title}</CardTitle>
-            <p className="text-sm text-slate-500 mb-2 font-medium">{movie.director}</p>
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+          <CardTitle className="text-sm font-semibold leading-tight truncate">{movie.title}</CardTitle>
+          {movie.director && <p className="text-xs text-slate-500 truncate">{movie.director}</p>}
+        </div>
+
+        {/* Acciones */}
+        <div className="flex items-center gap-2 shrink-0">
+          {/* Seen checkbox */}
+          <div className="flex flex-col items-center">
+            {isSeenPending ? (
+              <Loader2 className="h-4 w-4 animate-spin text-slate-400" />
+            ) : (
+              <Checkbox 
+                id={`seen-${movie.id}`} 
+                checked={localSeen}
+                onCheckedChange={handleSeen}
+                className="h-5 w-5 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
+              />
+            )}
+            <label htmlFor={`seen-${movie.id}`} className="text-[10px] text-slate-400 cursor-pointer select-none mt-0.5">
+              Vista
+            </label>
           </div>
 
-          <div className="mt-4 pt-2">
-            <Button 
-              variant={localVote ? "default" : "outline"} 
-              disabled={isVotePending}
-              className={`w-full transition-all active:scale-95 ${localVote ? 'bg-yellow-600 hover:bg-yellow-700 text-white font-bold shadow-md' : 'text-slate-600'}`}
-              onClick={handleVote}
-            >
-              {isVotePending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  {localVote ? 'Guardando...' : 'Quitando...'}
-                </>
-              ) : (
-                localVote ? '🏆 GANADORA' : 'Votar esta'
-              )}
-            </Button>
-          </div>
+          {/* Vote button */}
+          <Button 
+            variant={localVote ? "default" : "outline"} 
+            size="sm"
+            disabled={isVotePending}
+            className={`transition-all active:scale-95 text-xs px-3 h-8 ${localVote ? 'bg-yellow-600 hover:bg-yellow-700 text-white font-bold shadow-sm' : 'text-slate-600'}`}
+            onClick={handleVote}
+          >
+            {isVotePending ? (
+              <Loader2 className="h-3 w-3 animate-spin" />
+            ) : (
+              localVote ? '🏆' : 'Votar'
+            )}
+          </Button>
         </div>
       </div>
     </Card>

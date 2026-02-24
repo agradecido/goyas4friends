@@ -32,11 +32,11 @@ export function GoyasApp({ categories, myVotes, mySeen, user }: Props) {
     <div className="min-h-screen bg-slate-50">
       <NavBar username={user.username} />
 
-      <main className="max-w-4xl mx-auto p-4 pb-20 space-y-6">
+      <main className="max-w-4xl mx-auto p-3 pb-20 space-y-3">
         {/* SELECTOR DE CATEGORÍA (Sticky para que se quede arriba al hacer scroll) */}
-        <div className="sticky top-[60px] z-40 bg-slate-50/95 backdrop-blur py-2 -mx-4 px-4 border-b border-slate-100 md:border-none md:static md:p-0 md:bg-transparent">
+        <div className="sticky top-[56px] z-40 bg-slate-50/95 backdrop-blur py-1.5 -mx-3 px-3 border-b border-slate-100 md:border-none md:static md:p-0 md:bg-transparent">
           <Select value={activeCatId} onValueChange={setActiveCatId}>
-            <SelectTrigger className="w-full md:w-[400px] text-lg font-medium shadow-sm bg-white">
+            <SelectTrigger className="w-full md:w-[400px] text-base font-medium shadow-sm bg-white">
               <SelectValue placeholder="Selecciona categoría" />
             </SelectTrigger>
             <SelectContent>
@@ -50,7 +50,7 @@ export function GoyasApp({ categories, myVotes, mySeen, user }: Props) {
         </div>
 
         {/* LISTA DE PELÍCULAS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
           {activeCategory?.nominations.map((nom: any) => {
             const isVoted = myVotes.some(v => v.nominationId === nom.id)
             const isSeen = mySeen.some(s => s.movieId === nom.movie.id)

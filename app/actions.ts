@@ -211,7 +211,7 @@ export async function toggleVote(categoryId: string, nominationId: string) {
   // Optimistic update: No esperamos a leer el voto anterior si podemos evitarlo
   // Pero Prisma necesita saber si es update o create.
   // Usamos upsert o lógica directa.
-  
+
   const existingVote = await prisma.vote.findUnique({
     where: {
       userId_categoryId: {
@@ -272,7 +272,7 @@ export async function toggleSeen(movieId: string) {
       }
     })
   }
-  
+
   const { revalidatePath } = await import('next/cache')
   revalidatePath('/')
   revalidatePath('/movies')
