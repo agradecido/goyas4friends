@@ -24,7 +24,7 @@ export default function HelpPage() {
           <p className="text-slate-500">¿Cómo funciona esto?</p>
         </CardHeader>
         <CardContent className="space-y-6">
-          
+
           <div className="flex gap-4 items-start">
             <div className="bg-yellow-100 p-2 rounded-lg text-2xl shrink-0">🗳️</div>
             <div>
@@ -34,10 +34,10 @@ export default function HelpPage() {
           </div>
 
           <div className="flex gap-4 items-start">
-            <div className="bg-green-100 p-2 rounded-lg text-2xl shrink-0">🎬</div>
+            <div className="bg-orange-100 p-2 rounded-lg text-2xl shrink-0">📊</div>
             <div>
-              <h3 className="font-bold text-slate-900">Checklist de Películas</h3>
-              <p className="text-sm text-slate-600">Una lista simple para marcar las pelis que ya has visto. No afecta a la votación, es solo para llevar tu cuenta personal.</p>
+              <h3 className="font-bold text-slate-900">Ranking</h3>
+              <p className="text-sm text-slate-600">Mira cómo ha votado el grupo en cada categoría. Porcentajes, barras y quién votó a qué.</p>
             </div>
           </div>
 
@@ -46,6 +46,30 @@ export default function HelpPage() {
             <div>
               <h3 className="font-bold text-slate-900">Mi Quiniela</h3>
               <p className="text-sm text-slate-600">El resumen de todo lo que has votado, para que lo revises antes de la gala.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 items-start">
+            <div className="bg-green-100 p-2 rounded-lg text-2xl shrink-0">🎬</div>
+            <div>
+              <h3 className="font-bold text-slate-900">Checklist de Películas</h3>
+              <p className="text-sm text-slate-600">Una lista para marcar las pelis que ya has visto. No afecta a la votación, es solo para llevar tu cuenta personal.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 items-start">
+            <div className="bg-yellow-50 p-2 rounded-lg text-2xl shrink-0">🏆</div>
+            <div>
+              <h3 className="font-bold text-slate-900">Gala</h3>
+              <p className="text-sm text-slate-600">La noche de los Goyas: marca el ganador de cada categoría en directo mientras ves la ceremonia.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4 items-start">
+            <div className="bg-red-100 p-2 rounded-lg text-2xl shrink-0">🎯</div>
+            <div>
+              <h3 className="font-bold text-slate-900">Marcador</h3>
+              <p className="text-sm text-slate-600">¿Quién acierta más? Ranking de aciertos del grupo actualizado según se revelan los ganadores.</p>
             </div>
           </div>
 
