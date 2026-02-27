@@ -62,7 +62,7 @@ async function scrape() {
                 }
 
                 // Limpiar textos largos de copyright que a veces aparecen
-                person = person.replace(/Este contenido es una creación protegida.*$/s, '').trim();
+                person = person.replace(/Este contenido es una creación protegida[\s\S]*$/, '').trim();
 
                 if (movieTitle) {
                     nominations.push({
