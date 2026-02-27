@@ -278,3 +278,93 @@ export async function toggleSeen(movieId: string) {
   revalidatePath('/')
   revalidatePath('/movies')
 }
+
+// --- GALA: MARK WINNERS ---
+
+export async function toggleWinner(nominationId: string) {
+  const user = await getSession()
+  if (!user) return
+
+  // Get the nomination to find its category.
+  const nomination = await prisma.nomination.findUnique({
+    where: { id: nominationId },
+  })
+  if (!nomination) return
+
+  if (nomination.isWinner) {
+    // Unmark as winner.
+    await prisma.nomination.update({
+      where: { id: nominationId },
+      data: { isWinner: false },
+    })
+  } else {
+    // Clear any existing winner in this category, then mark this one.
+    await prisma.nomination.updateMany({
+      where: { categoryId: nomination.categoryId, isWinner: true },
+      data: { isWinner: false },
+    })
+    await prisma.nomination.update({
+      where: { id: nominationId },
+      data: { isWinner: true },
+    })
+  }
+
+  const { revalidatePath } = await import('next/cache')
+  revalidatePath('/gala')
+  revalidatePath('/scoreboard')
+  revalidatePath('/')
+}
+
+export async function getGalaData() {
+  const user = await getSession()
+  if (!user) return null
+
+  const categories = await getStaticCategories()
+  return { categories, user }
+}
+
+export async function getScoreboardData() {
+  const user = await getSession()
+  if (!user) return null
+
+  // Get all categories with winners and all votes.
+  const categories = await prisma.category.findMany({
+    include: {
+      nominations: {
+        include: {
+          movie: true,
+          votes: true,
+        },
+      },
+    },
+  })
+
+  // Find winner nomination IDs.
+  const winnerNominationIds = new Set(
+    categories
+      .flatMap((c) => c.nominations)
+      .filter((n) => n.isWinner)
+      .map((n) => n.id)
+  )
+
+  // Get all users.
+  const users = await prisma.user.findMany({
+    include: { votes: true },
+  })
+
+  // Calculate score for each user.
+  const scoreboard = users
+    .map((u) => {
+      const hits = u.votes.filter((v) => winnerNominationIds.has(v.nominationId)).length
+      const totalVotes = u.votes.length
+      return { username: u.username, hits, totalVotes }
+    })
+    .sort((a, b) => b.hits - a.hits || b.totalVotes - a.totalVotes)
+
+  const totalCategories = categories.length
+  const winnersRevealed = categories.filter((c) =>
+    c.nominations.some((n) => n.isWinner)
+  ).length
+
+  return { scoreboard, totalCategories, winnersRevealed, user }
+}

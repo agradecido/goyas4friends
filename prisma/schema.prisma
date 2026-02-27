@@ -48,7 +48,8 @@ model Nomination {
   movieId     String
   categoryId  String
   personName  String?  // Nombre del nominado (actor, director, etc.)
-  
+  isWinner    Boolean  @default(false) // Marked as winner during the gala
+
   movie       Movie    @relation(fields: [movieId], references: [id])
   category    Category @relation(fields: [categoryId], references: [id])
   

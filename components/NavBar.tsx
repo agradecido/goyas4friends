@@ -24,9 +24,9 @@ function LogoutButton({ mobile = false }: { mobile?: boolean }) {
   }
 
   return (
-    <Button 
-      variant={mobile ? "destructive" : "ghost"} 
-      className={mobile ? "w-full justify-start" : "text-red-500 hover:text-red-700 hover:bg-red-50"} 
+    <Button
+      variant={mobile ? "destructive" : "ghost"}
+      className={mobile ? "w-full justify-start" : "text-red-500 hover:text-red-700 hover:bg-red-50"}
       size="sm"
       onClick={handleLogout}
       disabled={isPending}
@@ -51,13 +51,15 @@ export function NavBar({ username }: { username: string }) {
     { href: '/ranking', label: '📊 Ranking' },
     { href: '/my-votes', label: '📝 Mi Quiniela' },
     { href: '/movies', label: '🎬 Checklist' },
+    { href: '/gala', label: '🏆 Gala' },
+    { href: '/scoreboard', label: '🎯 Marcador' },
     { href: '/help', label: 'ℹ️ Ayuda' },
   ]
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container flex h-14 max-w-4xl items-center justify-between mx-auto px-4">
-        
+
         {/* Título / Logo */}
         <div className="flex items-center gap-2 font-bold text-lg">
           <span className="text-xl">🐐</span> Goya's 2026
@@ -66,8 +68,8 @@ export function NavBar({ username }: { username: string }) {
         {/* Menú de Escritorio (Oculto en móvil) */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {links.map((link) => (
-            <Link 
-              key={link.href} 
+            <Link
+              key={link.href}
               href={link.href}
               className={`transition-colors hover:text-foreground/80 ${pathname === link.href ? 'text-foreground font-bold' : 'text-foreground/60'}`}
             >
@@ -104,23 +106,23 @@ export function NavBar({ username }: { username: string }) {
                     {link.label}
                   </Link>
                 ))}
-                
+
                 <div className="h-px bg-slate-200 my-2" />
-                
+
                 <div className="px-2 text-sm text-slate-500 mb-2">
                   Usuario: <span className="font-bold text-slate-900">{username}</span>
                 </div>
-                
+
                 <div className="w-full">
                   <LogoutButton mobile />
                 </div>
               </div>
             </SheetContent>
           </Sheet>
-          
+
           {/* Botón Logout Escritorio */}
           <div className="hidden md:block">
-             <LogoutButton />
+            <LogoutButton />
           </div>
         </div>
       </div>
