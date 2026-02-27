@@ -46,11 +46,18 @@ export async function GET(request: NextRequest) {
                     where: { movieId_categoryId: { movieId: movie.id, categoryId: category.id } }
                 })
 
+                const personName = nom.person?.trim() || null
+
                 if (!nomExists) {
                     await prisma.nomination.create({
-                        data: { movieId: movie.id, categoryId: category.id }
+                        data: { movieId: movie.id, categoryId: category.id, personName }
                     })
                     nominationsCreated++
+                } else if (personName && nomExists.personName !== personName) {
+                    await prisma.nomination.update({
+                        where: { id: nomExists.id },
+                        data: { personName }
+                    })
                 }
             }
         }

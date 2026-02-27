@@ -26,7 +26,7 @@ export default async function MyVotesPage() {
     return {
       category: cat.name,
       movie: nomination?.movie.title,
-      director: nomination?.movie.director,
+      personName: nomination?.personName,
       image: nomination?.movie.imageUrl
     }
   }).filter(Boolean) // Quitar nulos (categorías sin voto)
@@ -63,8 +63,12 @@ export default async function MyVotesPage() {
                 </div>
                 <div className="p-3 flex-1">
                   <div className="text-xs text-orange-600 font-bold uppercase tracking-wider mb-1">{item.category}</div>
-                  <div className="font-bold text-slate-900 text-lg leading-none mb-1">{item.movie}</div>
-                  <div className="text-sm text-slate-500">{item.director}</div>
+                  <div className="font-bold text-slate-900 text-lg leading-none mb-1">
+                    {item.personName || item.movie}
+                  </div>
+                  {item.personName && (
+                    <div className="text-sm text-slate-500">{item.movie}</div>
+                  )}
                 </div>
               </Card>
             ))}

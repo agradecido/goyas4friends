@@ -54,10 +54,13 @@ export default async function RankingPage() {
                       {/* Título y porcentaje */}
                       <div className="flex justify-between items-end">
                         <div className="font-medium text-slate-900 text-sm md:text-base">
-                          {nom.movie.title}
-                          {/* Mostrar director solo si no es igual al título (para evitar redundancia en categorías de persona) */}
-                          {nom.movie.director && !cat.name.includes('Película') && (
-                             <span className="text-xs text-slate-500 font-normal ml-1">({nom.movie.director})</span>
+                          {nom.personName ? (
+                            <>
+                              {nom.personName}
+                              <span className="text-xs text-slate-500 font-normal ml-1">({nom.movie.title})</span>
+                            </>
+                          ) : (
+                            nom.movie.title
                           )}
                         </div>
                         <div className="text-sm font-bold text-slate-700">{percentage}%</div>

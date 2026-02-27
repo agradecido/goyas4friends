@@ -63,6 +63,8 @@ export function GoyasApp({ categories, myVotes, mySeen, user }: Props) {
                 nominationId={nom.id}
                 isVoted={isVoted}
                 isSeen={isSeen}
+                personName={nom.personName}
+                categoryName={activeCategory.name}
               />
             )
           })}

@@ -8,15 +8,41 @@ import { useState, useEffect } from 'react'
 import { useTransition } from 'react'
 import { Loader2 } from 'lucide-react'
 
+// Categorías donde el personName se muestra debajo del título de película (son premios a personas)
+const PERSON_CATEGORIES = [
+  'mejor dirección',
+  'mejor dirección novel',
+  'mejor guion original',
+  'mejor guion adaptado',
+  'mejor música original',
+  'mejor canción original',
+  'mejor actor protagonista',
+  'mejor actriz protagonista',
+  'mejor actor de reparto',
+  'mejor actriz de reparto',
+  'mejor actor revelación',
+  'mejor actriz revelación',
+  'mejor dirección de producción',
+  'mejor dirección de fotografía',
+  'mejor montaje',
+  'mejor dirección de arte',
+  'mejor diseño de vestuario',
+  'mejor maquillaje y peluquería',
+  'mejor sonido',
+  'mejores efectos especiales',
+]
+
 type MovieCardProps = {
   movie: any
   categoryId: string
   nominationId: string
   isVoted: boolean
   isSeen: boolean
+  personName?: string
+  categoryName?: string
 }
 
-export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen }: MovieCardProps) {
+export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, personName, categoryName }: MovieCardProps) {
   // Usamos estado local para feedback instantáneo
   const [localVote, setLocalVote] = useState(isVoted)
   const [localSeen, setLocalSeen] = useState(isSeen)
@@ -61,8 +87,17 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen }: 
 
         {/* Info */}
         <div className="flex-1 min-w-0">
-          <CardTitle className="text-sm font-semibold leading-tight truncate">{movie.title}</CardTitle>
-          {movie.director && <p className="text-xs text-slate-500 truncate">{movie.director}</p>}
+          {personName && categoryName && PERSON_CATEGORIES.includes(categoryName.toLowerCase()) ? (
+            <>
+              <CardTitle className="text-sm font-semibold leading-tight truncate">{personName}</CardTitle>
+              <p className="text-xs text-slate-500 truncate">{movie.title}</p>
+            </>
+          ) : (
+            <>
+              <CardTitle className="text-sm font-semibold leading-tight truncate">{movie.title}</CardTitle>
+              {personName && <p className="text-xs text-slate-500 truncate">{personName}</p>}
+            </>
+          )}
         </div>
 
         {/* Acciones */}

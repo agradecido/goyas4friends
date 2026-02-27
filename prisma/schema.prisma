@@ -47,6 +47,7 @@ model Nomination {
   id          String   @id @default(uuid())
   movieId     String
   categoryId  String
+  personName  String?  // Nombre del nominado (actor, director, etc.)
   
   movie       Movie    @relation(fields: [movieId], references: [id])
   category    Category @relation(fields: [categoryId], references: [id])
