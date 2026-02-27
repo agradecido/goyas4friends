@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { isPersonCategory } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -64,11 +65,13 @@ export default async function MyVotesPage() {
                 <div className="p-3 flex-1">
                   <div className="text-xs text-orange-600 font-bold uppercase tracking-wider mb-1">{item.category}</div>
                   <div className="font-bold text-slate-900 text-lg leading-none mb-1">
-                    {item.personName || item.movie}
+                    {item.personName && isPersonCategory(item.category) ? item.personName : item.movie}
                   </div>
-                  {item.personName && (
+                  {item.personName && isPersonCategory(item.category) ? (
                     <div className="text-sm text-slate-500">{item.movie}</div>
-                  )}
+                  ) : item.personName ? (
+                    <div className="text-sm text-slate-500">{item.personName}</div>
+                  ) : null}
                 </div>
               </Card>
             ))}

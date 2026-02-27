@@ -3,6 +3,7 @@ import { NavBar } from '@/components/NavBar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { redirect } from 'next/navigation'
+import { isPersonCategory } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -54,13 +55,18 @@ export default async function RankingPage() {
                       {/* Título y porcentaje */}
                       <div className="flex justify-between items-end">
                         <div className="font-medium text-slate-900 text-sm md:text-base">
-                          {nom.personName ? (
+                          {nom.personName && isPersonCategory(cat.name) ? (
                             <>
                               {nom.personName}
                               <span className="text-xs text-slate-500 font-normal ml-1">({nom.movie.title})</span>
                             </>
                           ) : (
-                            nom.movie.title
+                            <>
+                              {nom.movie.title}
+                              {nom.personName && (
+                                <span className="text-xs text-slate-500 font-normal ml-1">({nom.personName})</span>
+                              )}
+                            </>
                           )}
                         </div>
                         <div className="text-sm font-bold text-slate-700">{percentage}%</div>

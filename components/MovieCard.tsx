@@ -7,30 +7,7 @@ import { toggleVote, toggleSeen } from '@/app/actions'
 import { useState, useEffect } from 'react'
 import { useTransition } from 'react'
 import { Loader2 } from 'lucide-react'
-
-// Categorías donde el personName se muestra debajo del título de película (son premios a personas)
-const PERSON_CATEGORIES = [
-  'mejor dirección',
-  'mejor dirección novel',
-  'mejor guion original',
-  'mejor guion adaptado',
-  'mejor música original',
-  'mejor canción original',
-  'mejor actor protagonista',
-  'mejor actriz protagonista',
-  'mejor actor de reparto',
-  'mejor actriz de reparto',
-  'mejor actor revelación',
-  'mejor actriz revelación',
-  'mejor dirección de producción',
-  'mejor dirección de fotografía',
-  'mejor montaje',
-  'mejor dirección de arte',
-  'mejor diseño de vestuario',
-  'mejor maquillaje y peluquería',
-  'mejor sonido',
-  'mejores efectos especiales',
-]
+import { isPersonCategory } from '@/lib/utils'
 
 type MovieCardProps = {
   movie: any
@@ -87,7 +64,7 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, pe
 
         {/* Info */}
         <div className="flex-1 min-w-0">
-          {personName && categoryName && PERSON_CATEGORIES.includes(categoryName.toLowerCase()) ? (
+          {personName && categoryName && isPersonCategory(categoryName) ? (
             <>
               <CardTitle className="text-sm font-semibold leading-tight truncate">{personName}</CardTitle>
               <p className="text-xs text-slate-500 truncate">{movie.title}</p>
