@@ -17,7 +17,7 @@ export async function login(formData: FormData) {
   if (user && user.password === password) {
     // Next.js 15: cookies() es asíncrono
     const cookieStore = await cookies()
-    cookieStore.set('auth_user', user.id, { httpOnly: true })
+    cookieStore.set('auth_user', user.id, { httpOnly: true, maxAge: 60 * 60 * 24 * 365 })
 
     if (!user.hasSeenHelp) {
       redirect('/help')
@@ -51,7 +51,7 @@ export async function register(formData: FormData) {
 
   // Auto-login al registrarse
   const cookieStore = await cookies()
-  cookieStore.set('auth_user', user.id, { httpOnly: true })
+  cookieStore.set('auth_user', user.id, { httpOnly: true, maxAge: 60 * 60 * 24 * 365 })
 
   // Usuario nuevo -> Directo a ayuda
   redirect('/help')
@@ -118,24 +118,24 @@ const CATEGORY_ORDER = [
 
 // Fetch categories and nominations (no cache - always fresh after deploy)
 async function getStaticCategories() {
-    const categories = await prisma.category.findMany({
-      include: {
-        nominations: {
-          include: {
-            movie: true
-          }
+  const categories = await prisma.category.findMany({
+    include: {
+      nominations: {
+        include: {
+          movie: true
         }
-      },
-    })
-    // Sort by custom order
-    return categories.sort((a, b) => {
-      const ia = CATEGORY_ORDER.indexOf(a.name)
-      const ib = CATEGORY_ORDER.indexOf(b.name)
-      if (ia === -1 && ib === -1) return a.name.localeCompare(b.name)
-      if (ia === -1) return 1
-      if (ib === -1) return -1
-      return ia - ib
-    })
+      }
+    },
+  })
+  // Sort by custom order
+  return categories.sort((a, b) => {
+    const ia = CATEGORY_ORDER.indexOf(a.name)
+    const ib = CATEGORY_ORDER.indexOf(b.name)
+    if (ia === -1 && ib === -1) return a.name.localeCompare(b.name)
+    if (ia === -1) return 1
+    if (ib === -1) return -1
+    return ia - ib
+  })
 }
 
 export async function getGoyasData() {
