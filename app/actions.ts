@@ -152,7 +152,12 @@ export async function getGoyasData() {
     prisma.seenMovie.findMany({ where: { userId: user.id } })
   ])
 
-  return { categories, myVotes, mySeen, user }
+  // Check if any category has a winner (gala has started).
+  const galaStarted = categories.some(c =>
+    c.nominations.some(n => n.isWinner)
+  )
+
+  return { categories, myVotes, mySeen, user, galaStarted }
 }
 
 export async function getAllMoviesData() {
@@ -213,11 +218,11 @@ export async function toggleVote(categoryId: string, nominationId: string) {
   // Pero Prisma necesita saber si es update o create.
   // Usamos upsert o lógica directa.
 
-  // Block voting if the category already has a winner.
-  const winnerInCategory = await prisma.nomination.findFirst({
-    where: { categoryId, isWinner: true },
+  // Block all voting once the gala has started (any winner exists).
+  const anyWinner = await prisma.nomination.findFirst({
+    where: { isWinner: true },
   })
-  if (winnerInCategory) return
+  if (anyWinner) return
 
   const existingVote = await prisma.vote.findUnique({
     where: {
