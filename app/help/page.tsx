@@ -29,7 +29,7 @@ export default function HelpPage() {
             <div className="bg-yellow-100 p-2 rounded-lg text-2xl shrink-0">🗳️</div>
             <div>
               <h3 className="font-bold text-slate-900">Votar (La Quiniela)</h3>
-              <p className="text-sm text-slate-600">Elige quién crees que va a ganar el Goya. Solo puedes votar uno por categoría. ¡A ver quién acierta más!</p>
+              <p className="text-sm text-slate-600">Elige quién crees que va a ganar el Goya en cada categoría. Solo un voto por categoría. <strong>⚠️ En cuanto empiece la gala y se marque el primer ganador, se bloquean todos los votos.</strong> ¡Así que vota antes!</p>
             </div>
           </div>
 

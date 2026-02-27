@@ -22,7 +22,7 @@ type Props = {
 export function GoyasApp({ categories, myVotes, mySeen, user, galaStarted = false }: Props) {
   // Asegurarnos de que tenemos categorías
   const defaultCat = categories && categories.length > 0 ? categories[0].id : ''
-  
+
   // Estado para la categoría seleccionada (por defecto la primera)
   const [activeCatId, setActiveCatId] = useState(defaultCat)
 
@@ -55,9 +55,9 @@ export function GoyasApp({ categories, myVotes, mySeen, user, galaStarted = fals
           {activeCategory?.nominations.map((nom: any) => {
             const isVoted = myVotes.some(v => v.nominationId === nom.id)
             const isSeen = mySeen.some(s => s.movieId === nom.movie.id)
-            
+
             return (
-              <MovieCard 
+              <MovieCard
                 key={nom.id}
                 movie={nom.movie}
                 categoryId={activeCategory.id}
@@ -72,7 +72,7 @@ export function GoyasApp({ categories, myVotes, mySeen, user, galaStarted = fals
             )
           })}
         </div>
-        
+
         {/* Mensaje si no hay nada */}
         {(!activeCategory || activeCategory.nominations.length === 0) && (
           <div className="text-center py-10 text-slate-400">
