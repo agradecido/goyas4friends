@@ -140,7 +140,7 @@ const getStaticCategories = unstable_cache(
       return ia - ib
     })
   },
-  ['goyas-static-data'], // Clave de caché
+  ['goyas-static-data-v2'], // Clave de caché (cambiar para invalidar)
   { revalidate: 3600 }   // Revalidar cada hora (o nunca, si no cambian)
 )
 
