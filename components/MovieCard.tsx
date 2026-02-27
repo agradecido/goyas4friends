@@ -17,9 +17,11 @@ type MovieCardProps = {
   isSeen: boolean
   personName?: string
   categoryName?: string
+  locked?: boolean
+  isWinner?: boolean
 }
 
-export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, personName, categoryName }: MovieCardProps) {
+export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, personName, categoryName, locked = false, isWinner = false }: MovieCardProps) {
   // Usamos estado local para feedback instantáneo
   const [localVote, setLocalVote] = useState(isVoted)
   const [localSeen, setLocalSeen] = useState(isSeen)
@@ -51,7 +53,7 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, pe
   }
 
   return (
-    <Card className={`overflow-hidden transition-all duration-200 ${localVote ? 'border-2 border-yellow-500 bg-yellow-50/50' : 'hover:border-slate-300'}`}>
+    <Card className={`overflow-hidden transition-all duration-200 ${isWinner ? 'border-2 border-yellow-500 bg-yellow-50/50 ring-2 ring-yellow-300' : localVote ? 'border-2 border-yellow-500 bg-yellow-50/50' : 'hover:border-slate-300'}`}>
       <div className="flex items-center gap-3 p-3">
         {/* Thumbnail pequeño */}
         <div className="w-12 h-16 bg-slate-200 rounded shrink-0 overflow-hidden">
@@ -108,19 +110,23 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, pe
           </div>
 
           {/* Vote button */}
-          <Button
-            variant={localVote ? "default" : "outline"}
-            size="sm"
-            disabled={isVotePending}
-            className={`transition-all active:scale-95 text-xs px-3 h-8 ${localVote ? 'bg-yellow-600 hover:bg-yellow-700 text-white font-bold shadow-sm' : 'text-slate-600'}`}
-            onClick={handleVote}
-          >
-            {isVotePending ? (
-              <Loader2 className="h-3 w-3 animate-spin" />
-            ) : (
-              localVote ? '🏆' : 'Votar'
-            )}
-          </Button>
+          {locked ? (
+            <span className="text-lg">{isWinner ? '🏆' : ''}</span>
+          ) : (
+            <Button
+              variant={localVote ? "default" : "outline"}
+              size="sm"
+              disabled={isVotePending}
+              className={`transition-all active:scale-95 text-xs px-3 h-8 ${localVote ? 'bg-yellow-600 hover:bg-yellow-700 text-white font-bold shadow-sm' : 'text-slate-600'}`}
+              onClick={handleVote}
+            >
+              {isVotePending ? (
+                <Loader2 className="h-3 w-3 animate-spin" />
+              ) : (
+                localVote ? '🏆' : 'Votar'
+              )}
+            </Button>
+          )}
         </div>
       </div>
     </Card>

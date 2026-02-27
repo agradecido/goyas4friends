@@ -54,6 +54,7 @@ export function GoyasApp({ categories, myVotes, mySeen, user }: Props) {
           {activeCategory?.nominations.map((nom: any) => {
             const isVoted = myVotes.some(v => v.nominationId === nom.id)
             const isSeen = mySeen.some(s => s.movieId === nom.movie.id)
+            const categoryHasWinner = activeCategory.nominations.some((n: any) => n.isWinner)
             
             return (
               <MovieCard 
@@ -65,6 +66,8 @@ export function GoyasApp({ categories, myVotes, mySeen, user }: Props) {
                 isSeen={isSeen}
                 personName={nom.personName}
                 categoryName={activeCategory.name}
+                locked={categoryHasWinner}
+                isWinner={nom.isWinner}
               />
             )
           })}

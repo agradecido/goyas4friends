@@ -213,6 +213,12 @@ export async function toggleVote(categoryId: string, nominationId: string) {
   // Pero Prisma necesita saber si es update o create.
   // Usamos upsert o lógica directa.
 
+  // Block voting if the category already has a winner.
+  const winnerInCategory = await prisma.nomination.findFirst({
+    where: { categoryId, isWinner: true },
+  })
+  if (winnerInCategory) return
+
   const existingVote = await prisma.vote.findUnique({
     where: {
       userId_categoryId: {

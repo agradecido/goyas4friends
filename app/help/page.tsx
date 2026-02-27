@@ -74,8 +74,8 @@ export default function HelpPage() {
           </div>
 
           <div className="pt-4">
-            <Button 
-              onClick={handleComplete} 
+            <Button
+              onClick={handleComplete}
               disabled={isPending}
               className="w-full bg-slate-900 hover:bg-slate-800 text-lg py-6"
             >
