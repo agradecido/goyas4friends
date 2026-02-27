@@ -32,3 +32,20 @@ export const PERSON_CATEGORIES = [
 export function isPersonCategory(categoryName: string): boolean {
   return PERSON_CATEGORIES.includes(categoryName.toLowerCase())
 }
+
+// Categories for short films.
+export const SHORT_FILM_CATEGORIES = [
+  'mejor cortometraje de ficción',
+  'mejor cortometraje documental',
+  'mejor cortometraje de animación',
+]
+
+export function isShortFilmCategory(categoryName: string): boolean {
+  return SHORT_FILM_CATEGORIES.includes(categoryName.toLowerCase())
+}
+
+// Build a YouTube search URL for a short film title.
+export function shortFilmSearchUrl(title: string): string {
+  const query = `${title} cortometraje completo`
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
+}

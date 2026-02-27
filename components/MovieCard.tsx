@@ -6,8 +6,8 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { toggleVote, toggleSeen } from '@/app/actions'
 import { useState, useEffect } from 'react'
 import { useTransition } from 'react'
-import { Loader2 } from 'lucide-react'
-import { isPersonCategory } from '@/lib/utils'
+import { Loader2, ExternalLink } from 'lucide-react'
+import { isPersonCategory, isShortFilmCategory, shortFilmSearchUrl } from '@/lib/utils'
 
 type MovieCardProps = {
   movie: any
@@ -74,6 +74,17 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, pe
               <CardTitle className="text-sm font-semibold leading-tight truncate">{movie.title}</CardTitle>
               {personName && <p className="text-xs text-slate-500 truncate">{personName}</p>}
             </>
+          )}
+          {categoryName && isShortFilmCategory(categoryName) && (
+            <a
+              href={shortFilmSearchUrl(movie.title)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-800 hover:underline mt-0.5"
+            >
+              <ExternalLink className="h-3 w-3" />
+              Ver online
+            </a>
           )}
         </div>
 

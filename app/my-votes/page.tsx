@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { isPersonCategory } from '@/lib/utils'
+import { isPersonCategory, isShortFilmCategory, shortFilmSearchUrl } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -72,6 +72,16 @@ export default async function MyVotesPage() {
                   ) : item.personName ? (
                     <div className="text-sm text-slate-500">{item.personName}</div>
                   ) : null}
+                  {isShortFilmCategory(item.category) && (
+                    <a
+                      href={shortFilmSearchUrl(item.movie)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-800 hover:underline mt-1"
+                    >
+                      ▶ Ver online
+                    </a>
+                  )}
                 </div>
               </Card>
             ))}

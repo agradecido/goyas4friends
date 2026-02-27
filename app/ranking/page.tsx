@@ -3,7 +3,7 @@ import { NavBar } from '@/components/NavBar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { redirect } from 'next/navigation'
-import { isPersonCategory } from '@/lib/utils'
+import { isPersonCategory, isShortFilmCategory, shortFilmSearchUrl } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -67,6 +67,16 @@ export default async function RankingPage() {
                                 <span className="text-xs text-slate-500 font-normal ml-1">({nom.personName})</span>
                               )}
                             </>
+                          )}
+                          {isShortFilmCategory(cat.name) && (
+                            <a
+                              href={shortFilmSearchUrl(nom.movie.title)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[11px] text-blue-600 hover:text-blue-800 hover:underline ml-2"
+                            >
+                              ▶ Ver
+                            </a>
                           )}
                         </div>
                         <div className="text-sm font-bold text-slate-700">{percentage}%</div>
