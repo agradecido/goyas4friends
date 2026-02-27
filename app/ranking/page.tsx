@@ -19,7 +19,7 @@ export default async function RankingPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       <NavBar username={data.user.username} />
-      
+
       <main className="max-w-3xl mx-auto p-4 pb-20 space-y-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-slate-900 mb-2">📊 Quiniela del Grupo</h1>
@@ -31,7 +31,7 @@ export default async function RankingPage() {
         {categories.map((cat) => {
           // Calcular total de votos en esta categoría
           const totalVotesInCat = cat.nominations.reduce((acc, nom) => acc + nom.votes.length, 0)
-          
+
           // Ordenar nominaciones por número de votos (de más a menos)
           const sortedNominations = [...cat.nominations]
             .sort((a, b) => b.votes.length - a.votes.length)
@@ -46,8 +46,8 @@ export default async function RankingPage() {
               </CardHeader>
               <CardContent className="pt-4 space-y-5">
                 {sortedNominations.map((nom) => {
-                  const percentage = totalVotesInCat > 0 
-                    ? Math.round((nom.votes.length / totalVotesInCat) * 100) 
+                  const percentage = totalVotesInCat > 0
+                    ? Math.round((nom.votes.length / totalVotesInCat) * 100)
                     : 0
 
                   return (
@@ -84,7 +84,7 @@ export default async function RankingPage() {
 
                       {/* Barra de progreso */}
                       <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-orange-500 rounded-full transition-all duration-500"
                           style={{ width: `${percentage}%` }}
                         />

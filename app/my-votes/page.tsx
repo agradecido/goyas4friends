@@ -35,7 +35,7 @@ export default async function MyVotesPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       <NavBar username={data.user.username} />
-      
+
       <main className="max-w-2xl mx-auto p-4 pb-20">
         <div className="mb-6 flex justify-between items-end">
           <div>
@@ -56,11 +56,11 @@ export default async function MyVotesPage() {
             {votingSummary.map((item: any) => (
               <Card key={item.category} className="flex overflow-hidden">
                 <div className="w-20 bg-slate-200 shrink-0 relative">
-                   {item.image ? (
-                     <img src={item.image} alt={item.movie} className="w-full h-full object-cover" />
-                   ) : (
-                     <div className="flex items-center justify-center h-full text-slate-400 text-xl">🎬</div>
-                   )}
+                  {item.image ? (
+                    <img src={item.image} alt={item.movie} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="flex items-center justify-center h-full text-slate-400 text-xl">🎬</div>
+                  )}
                 </div>
                 <div className="p-3 flex-1">
                   <div className="text-xs text-orange-600 font-bold uppercase tracking-wider mb-1">{item.category}</div>

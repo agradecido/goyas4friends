@@ -23,7 +23,7 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, pe
   // Usamos estado local para feedback instantáneo
   const [localVote, setLocalVote] = useState(isVoted)
   const [localSeen, setLocalSeen] = useState(isSeen)
-  
+
   const [isVotePending, startVoteTransition] = useTransition()
   const [isSeenPending, startSeenTransition] = useTransition()
 
@@ -35,7 +35,7 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, pe
     // Cambio visual inmediato
     const newValue = !localVote
     setLocalVote(newValue)
-    
+
     startVoteTransition(async () => {
       // Llamada al servidor en segundo plano
       await toggleVote(categoryId, nominationId)
@@ -44,7 +44,7 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, pe
 
   const handleSeen = (checked: boolean) => {
     setLocalSeen(checked)
-    
+
     startSeenTransition(async () => {
       await toggleSeen(movie.id)
     })
@@ -95,8 +95,8 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, pe
             {isSeenPending ? (
               <Loader2 className="h-4 w-4 animate-spin text-slate-400" />
             ) : (
-              <Checkbox 
-                id={`seen-${movie.id}`} 
+              <Checkbox
+                id={`seen-${movie.id}`}
                 checked={localSeen}
                 onCheckedChange={handleSeen}
                 className="h-5 w-5 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
@@ -108,8 +108,8 @@ export function MovieCard({ movie, categoryId, nominationId, isVoted, isSeen, pe
           </div>
 
           {/* Vote button */}
-          <Button 
-            variant={localVote ? "default" : "outline"} 
+          <Button
+            variant={localVote ? "default" : "outline"}
             size="sm"
             disabled={isVotePending}
             className={`transition-all active:scale-95 text-xs px-3 h-8 ${localVote ? 'bg-yellow-600 hover:bg-yellow-700 text-white font-bold shadow-sm' : 'text-slate-600'}`}
