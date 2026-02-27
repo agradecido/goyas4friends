@@ -3,7 +3,6 @@
 import { prisma } from '@/lib/prisma'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { unstable_cache } from 'next/cache'
 
 // --- AUTH ---
 
@@ -117,9 +116,8 @@ const CATEGORY_ORDER = [
   'Mejor cortometraje de animación',
 ]
 
-// Cacheamos las categorías y nominados (datos estáticos para todos)
-const getStaticCategories = unstable_cache(
-  async () => {
+// Fetch categories and nominations (no cache - always fresh after deploy)
+async function getStaticCategories() {
     const categories = await prisma.category.findMany({
       include: {
         nominations: {
@@ -129,20 +127,16 @@ const getStaticCategories = unstable_cache(
         }
       },
     })
-    // Ordenar según el orden personalizado
+    // Sort by custom order
     return categories.sort((a, b) => {
       const ia = CATEGORY_ORDER.indexOf(a.name)
       const ib = CATEGORY_ORDER.indexOf(b.name)
-      // Categorías no listadas van al final, ordenadas alfabéticamente
       if (ia === -1 && ib === -1) return a.name.localeCompare(b.name)
       if (ia === -1) return 1
       if (ib === -1) return -1
       return ia - ib
     })
-  },
-  ['goyas-static-data-v2'], // Clave de caché (cambiar para invalidar)
-  { revalidate: 3600 }   // Revalidar cada hora (o nunca, si no cambian)
-)
+}
 
 export async function getGoyasData() {
   const user = await getSession()
